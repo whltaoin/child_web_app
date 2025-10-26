@@ -6,17 +6,29 @@
 }
 
 :root {
-  /* 字体设置 */
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
-    'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-    'Noto Color Emoji';
-  font-size: 14px;
-  line-height: 1.5;
+  /* 淡色系、童真感主题颜色变量 */
+  --primary-color: #ff9e7d;
+  --secondary-color: #a8d0e6;
+  --accent-color: #f8e9a1;
+  --background-light: #f9f7f2;
+  --background-white: #fffdfa;
+  --card-background: #ffffff;
+  --text-primary: #5a4b3f;
+  --text-secondary: #7a695b;
+  --border-color: #f0e6d8;
+  --success-color: #6cc5a1;
+  --warning-color: #f8b400;
+  --error-color: #ff7d7d;
+  --info-color: #84b6f4;
+  
+  /* 淡色系、童真感主题字体设置 */
+  font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
   font-weight: 400;
-
-  /* 颜色设置 - 移动端通常使用明亮主题 */
-  color: #333333;
-  background-color: #ffffff;
+  
+  color: var(--text-primary);
+  background-color: var(--background-light);
 
   /* 优化渲染 */
   font-synthesis: none;
@@ -30,23 +42,25 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #f5f5f5;
+  background-color: var(--background-light);
   overflow-x: hidden;
-  /* 禁止文本选择（可选） */
-  /* -webkit-user-select: none; */
-  /* user-select: none; */
-  /* 禁止长按弹出菜单（可选） */
-  /* -webkit-touch-callout: none; */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 移动端样式重置 */
+html {
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* 链接样式 */
 a {
-  color: #1989fa;
+  color: var(--primary-color);
   text-decoration: none;
+  transition: all 0.3s ease;
 }
 
-a:active {
-  opacity: 0.8;
+a:hover {
+  color: var(--secondary-color);
 }
 
 /* 按钮基础样式 */
@@ -58,9 +72,32 @@ button {
   outline: none;
   background: none;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 
-/* 输入框样式重置 */
+/* 童真风格按钮效果 */
+.child-button {
+  background-color: var(--accent-color);
+  color: var(--text-primary);
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(248, 233, 161, 0.4);
+}
+
+.child-button:hover {
+  background-color: #f7dc6f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(248, 233, 161, 0.6);
+}
+
+.child-button:active {
+  transform: translateY(0);
+}
+
+/* 输入框样式重置 - 童真风格 */
 input,
 textarea,
 select {
@@ -68,6 +105,24 @@ select {
   font-size: inherit;
   line-height: inherit;
   outline: none;
+  background-color: white;
+  border: 2px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 12px 16px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(255, 158, 125, 0.2);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-secondary);
 }
 
 /* 图片样式 */
@@ -75,6 +130,16 @@ img {
   max-width: 100%;
   height: auto;
   vertical-align: middle;
+  border-radius: 12px;
+}
+
+/* 童真元素 */
+.child-element {
+  border-radius: 20px;
+  background-color: white;
+  padding: 20px;
+  border: 2px solid var(--border-color);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
 }
 
 /* 应用容器 */
@@ -82,10 +147,37 @@ img {
   width: 100%;
   margin: 0 auto;
   min-height: 100vh;
-  background-color: #ffffff;
+  background-color: var(--background-light);
   /* 适配刘海屏等异形屏 */
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
+}
+
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--background-light);
+  padding: 20px;
+}
+
+/* 童真风格边框效果 */
+.child-border {
+  position: relative;
+  border-radius: 16px;
+  background: white;
+  border: 2px solid var(--border-color);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.child-border:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.child-border-glow {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 10px rgba(248, 233, 161, 0.3);
 }
 
 /* 解决1px边框问题的辅助类 */
@@ -100,27 +192,128 @@ img {
   top: 0;
   width: 200%;
   height: 200%;
-  border: 1px solid #e5e5e5;
-  border-radius: 2px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
   transform-origin: 0 0;
   transform: scale(0.5);
   box-sizing: border-box;
 }
 
-/* 适配横屏 */
-@media screen and (orientation: landscape) {
-  /* 横屏时的特殊样式 */
+/* 横屏适配 */
+@media (orientation: landscape) and (max-height: 500px) {
+  .app-container {
+    padding: 10px;
+  }
+}
+
+/* 1px边框解决方案 */
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+  .border-1px::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--border-color);
+    transform: scaleY(0.5);
+  }
+  
+  .border-1px::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 1px;
+    height: 100%;
+    background-color: var(--border-color);
+    transform: scaleX(0.5);
+  }
 }
 
 /* 响应式字体大小 */
-@media screen and (min-width: 375px) {
+@media (max-width: 375px) {
+  :root {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 414px) {
   :root {
     font-size: 15px;
   }
 }
 
-@media screen and (min-width: 414px) {
-  :root {
-    font-size: 16px;
+/* 柔和滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+  opacity: 0.7;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  opacity: 1;
+}
+
+/* 童真风格动画效果 */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
   }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.bounce-animation {
+  animation: bounce 2s infinite;
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* 童趣元素 - 彩色圆点装饰 */
+.dot-decoration {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.dot-pink {
+  background-color: #ff9e9e;
+}
+
+.dot-blue {
+  background-color: #a8d0e6;
+}
+
+.dot-yellow {
+  background-color: #f8e9a1;
+}
+
+.dot-green {
+  background-color: #6cc5a1;
 }
